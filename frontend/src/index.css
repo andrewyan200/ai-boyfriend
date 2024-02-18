@@ -1,0 +1,220 @@
+@font-face {
+  font-family: "PP Mondwest";
+  src: url("./fonts/PPMondwest-Regular.otf") format("opentype");
+}
+@font-face {
+  font-family: "PP Neue Montreal";
+  src: url("./fonts/PPNeueMontreal-Book.otf") format("opentype");
+}
+@font-face {
+  font-family: "PP Editorial New";
+  src: url("./fonts/PPEditorialNew-Ultralight.otf") format("opentype");
+}
+@font-face {
+  font-family: "PP Editorial New Italic";
+  src: url("./fonts/PPEditorialNew-UltralightItalic.otf") format("opentype");
+}
+@font-face {
+  font-family: "Xanh Mono";
+  src: url("./fonts/XanhMono-Regular.ttf") format("truetype");
+}
+
+body {
+  background-color: var(--off-white);
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  /* background-color: purple; */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+  background-color: var(--off-white);
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: space-between;
+  /* background-color: black; */
+  height: 100vh;
+  width: 100vw;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  max-width: 1000px;
+  padding: 32px;
+  /* left: 50%;
+  transform: translateX(-50%); */
+}
+.stepText {
+  color: var(--blueberry, #3600cf);
+  text-align: center;
+  font-family: "PP Editorial New";
+  font-size: 67px;
+  font-style: normal;
+  font-weight: 200;
+  line-height: normal;
+  letter-spacing: -1.33px;
+}
+
+.miniStep {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  width: auto;
+  padding: 32px;
+  /* left: 50%;
+  transform: translateX(-50%); */
+}
+.miniStepText {
+  color: var(--blueberry, #3600cf);
+  text-align: center;
+  font-family: "PP Editorial New";
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 200;
+  line-height: normal;
+  letter-spacing: -1.33px;
+  opacity: 0.6;
+}
+
+.inputStepText {
+  color: var(--blueberry, #3600cf);
+  text-align: center;
+  font-family: "PP Editorial New", sans-serif; /* Fallback font added */
+  font-size: 67px;
+  font-style: normal;
+  font-weight: 200;
+  border: none; /* Removes default border */
+  background-color: transparent; /* Makes background transparent */
+  width: 100%; /* Adjust based on your layout */
+  padding: 10px 0; /* Adjust for proper vertical alignment, if needed */
+
+  /* Additional styles for better appearance and UX */
+  outline: none; /* Removes the default focus outline, consider replacing with a custom style for accessibility */
+  letter-spacing: -1.33px;
+}
+
+.inputStepText::placeholder {
+  color: var(--blueberry, #3600cf); /* Style placeholder text */
+  opacity: 0.3; /* Ensure consistent placeholder opacity */
+}
+
+.rsvpButtonText {
+  color: #3600cf;
+  font-family: "PP Mondwest";
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  padding-left: 21px;
+  padding-top: 5px;
+  white-space: nowrap;
+}
+
+.rsvpButton {
+  /* display: flex;
+  padding-left: 32px;
+  padding-right: 32px; */
+
+  display: flex;
+  width: 364px;
+  height: 64px;
+
+  border-radius: 100px;
+  border-style: solid;
+  border-color: var(--blueberry);
+  border-width: 1.5;
+
+  transition: width 0.5s, opacity 0.75s;
+  align-items: center;
+  gap: 13px;
+
+  text-decoration: none;
+  background-color: var(--off-white);
+
+  margin-top: 80px;
+}
+.rsvpButton:hover {
+  background-color: var(--blueberry);
+  width: 400px;
+}
+.rsvpButtonSubmitted {
+  background-color: var(--blueberry);
+}
+.rsvpButtonSubmitted:hover {
+  width: 364px;
+}
+.rsvpButton:hover .arrow {
+  visibility: hidden;
+}
+.arrow {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.5s, visibility 0.5s;
+}
+.rsvpButton:hover .arrow {
+  visibility: visible;
+  opacity: 1;
+}
+.rsvpButton:hover .rsvpButtonText {
+  color: var(--off-white);
+}
+
+.rsvpButtonDisabled {
+  opacity: 0%;
+  transition: opacity 0.75s;
+}
+@media only screen and (max-width: 1000px) {
+  .rsvpButtonText {
+    font-size: 32px;
+    padding-left: 12px;
+  }
+  .step {
+    padding: 8px;
+  }
+  .rsvpButton {
+    width: 250px;
+    height: 40px;
+  }
+  .rsvpButton:hover {
+    width: 286px;
+  }
+  .rsvpButton:hover .rsvpButtonText {
+    color: var(--off-white);
+  }
+}
+@media only screen and (max-width: 768px) {
+  .stepText {
+    font-size: 36px;
+  }
+  .inputStepText {
+    font-size: 36px;
+  }
+  .miniStepText {
+    font-size: 23px;
+  }
+}
