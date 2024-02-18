@@ -63,7 +63,7 @@ def order_instacart(product_link):
     # text_area.send_keys("Please leave at the front door")
     # save_and_continue = driver.find_element(By.CLASS_NAME, "e-15utg5h")
     # save_and_continue.click()
-    # time.sleep(8)
+    time.sleep(2)
     wait = WebDriverWait(driver, 10)
     element = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button.e-rloafg")))
     element.click()
@@ -84,12 +84,12 @@ def order_instacart(product_link):
 
     time.sleep(10)
 
-    # Simulating Order Placed (uncomment)
-    # # Find the span element by its text content "Place order"
-    # place_order_span = driver.find_element(
-    #     By.XPATH, "//span[text()='Place order']")
-    # # Click the span element
-    # place_order_span.click()
+    #Simulating Order Placed (uncomment)
+    # Find the span element by its text content "Place order"
+    place_order_span = driver.find_element(
+        By.XPATH, "//span[text()='Place order']")
+    # Click the span element
+    place_order_span.click()
 
     print("Order placed!!")
     driver.quit()

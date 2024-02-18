@@ -4,6 +4,7 @@ from pinecone import Pinecone, ServerlessSpec
 import yaml
 from dotenv import load_dotenv
 from instacart import order_medicine, order_coffee
+import threading
 
 # Load default environment variables (.env)
 load_dotenv()
@@ -191,9 +192,15 @@ class Agent():
             print("------------EXTERNAL THOUGHT------------")
             print(external_thought)
         if "[ORDER_COFFEE]" in external_thought:
-            order_coffee()
+            # Launch order_coffee in a separate thread
+            coffee_thread = threading.Thread(target=order_coffee)
+            coffee_thread.start()
+            return "Don't worry, I'll order you some coffee" + external_thought
+
         if "[ORDER_MEDICINE]" in external_thought:
-            order_medicine()
+            medicine_thread = threading.Thread(target=order_medicine)
+            medicine_thread.start()
+            return "Don't worry, I'll order you some medicine" + external_thought
         
         return external_thought
         
