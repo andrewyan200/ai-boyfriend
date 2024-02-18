@@ -1,7 +1,7 @@
-openai==0.27.2
-pinecone_client==2.2.1
-python-dotenv==1.0.1
-PyYAML==6.0
-PyYAML==6.0.1
+capsolver_python==1.0
+openai==1.12.0
+pinecone==0.1.0
+python-telegram-bot==20.8
 selenium==4.17.2
+undetected_chromedriver==3.5.5
 webdriver_manager==4.0.1
