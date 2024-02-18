@@ -6,40 +6,45 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+from dotenv import load_dotenv
+import os
 import time
 
-def order_product(product_url: str):
-    
-profile_path = r"C:\Users\Alexander\AppData\Local\Google\Chrome\User Data\Default"
+load_dotenv()
+INSTACART_EMAIL = os.getenv("INSTACART_EMAIL")
+INSTACART_PASSWORD = os.getenv("INSTACART_PASSWORD")
+COFFEE_LINK = "https://www.instacart.com/products/248557-high-brew-cold-brew-coffee-mexican-vanilla-8-fl-oz?retailerSlug=safeway"
+MEDICINE_LINK = "https://www.instacart.com/products/90236-vicks-dayquil-and-nyquil-cold-flu-and-congestion-medicine-48-ct?retailerSlug=safeway"
+CHECKOUT_LINK = "https://www.instacart.com/store/checkout_v4?sid=53040"
+DELIVERY_ADDRESS = "475 Via Ortega, Stanford, CA 94305"
 
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
-chrome_options.add_argument("user-data-dir=" + profile_path)
-# chrome_options.add_argument("--start-maximized")
+
+driver = webdriver.Chrome(options=chrome_options)
 
 
-# Initialize the Chrome WebDriver
+chrome_options = Options()
+chrome_options.add_experimental_option("detach", True)
 driver = webdriver.Chrome(options=chrome_options)
 
 # URL of the Instacart CVS storefront
-# login_url = "https://www.instacart.com/login"
+login_url = "https://www.instacart.com/login"
 store_url = "https://www.instacart.com/store/cvs"
 
-
 # Open the URL
-
-# driver.get(login_url)
-# driver.implicitly_wait(8)
-# email_input = driver.find_element(By.CSS_SELECTOR, "input[type='email']")
-# email_input.send_keys("halperna22@gmail.com")
-# driver.implicitly_wait(5)
-# email_input = driver.find_element(By.CSS_SELECTOR, "input[type='password']")
-# email_input.send_keys("Treehacks1!")
-# submit_button = driver.find_element(
-#     By.CSS_SELECTOR, "button[class='e-ztomkz']")
-# submit_button.click()
-# driver.implicitly_wait(5)
+driver.get(login_url)
+time.sleep(1)
+email_input = driver.find_element(By.CSS_SELECTOR, "input[type='email']")
+email_input.send_keys(INSTACART_EMAIL)
+time.sleep(1)
+email_input = driver.find_element(By.CSS_SELECTOR, "input[type='password']")
+email_input.send_keys(INSTACART_PASSWORD)
+time.sleep(1)
+submit_button = driver.find_element(
+    By.CSS_SELECTOR, "button[class='e-ztomkz']")
+submit_button.click()
+time.sleep(10)
 # CVS_button = driver.find_element(By.CSS_SELECTOR, "img[alt='CVS®']")
 # CVS_button.click()
 # driver.implicitly_wait(5)
@@ -55,7 +60,7 @@ add_button = driver.find_element(
 
 add_button.click()
 
-driver.implicitly_wait(20)
+driver.implicitly_wait(5)
 driver.get("https://www.instacart.com/store/checkout_v4?sid=53040")
 
 # text_area = driver.find_element(By.ID, "deliveryInstructions")
@@ -65,11 +70,11 @@ driver.get("https://www.instacart.com/store/checkout_v4?sid=53040")
 # time.sleep(8)
 choose_delivery_time = driver.find_element(By.CLASS_NAME, "e-rloafg")
 choose_delivery_time.click()
-phone_number = driver.find_element(By.CSS_SELECTOR, "input[type='tel']")
-phone_number.send_keys("2034518641")
-submit_phone_number = driver.find_element(By.CLASS_NAME, "e-sp84se")
-submit_phone_number.click()
-time.sleep(4)
+# phone_number = driver.find_element(By.CSS_SELECTOR, "input[type='tel']")
+# phone_number.send_keys("2034518641")
+# submit_phone_number = driver.find_element(By.CLASS_NAME, "e-sp84se")
+# submit_phone_number.click()
+# time.sleep(4)
 final_continue = driver.find_element(By.CLASS_NAME, "e-15utg5h")
 final_continue.click()
 time.sleep(8)
