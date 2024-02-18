@@ -12,6 +12,7 @@ OPENAI_MODEL = os.getenv("OPENAI_MODEL") or "gpt-4"
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 PINECONE_API_ENV = os.getenv("PINECONE_API_ENV")
+DEBUG=False
 
 pc = Pinecone(api_key=PINECONE_API_KEY)
 
@@ -149,16 +150,21 @@ class Agent():
         results = query_results.matches + thought_results.matches
         sorted_results = sorted(results, key=lambda x: x.score, reverse=True)
         top_matches = "\n\n".join([(str(item.metadata["thought_string"])) for item in sorted_results])
-        #print(top_matches)
+        if DEBUG:
+            print("------------TOP MATCHES------------")
+            print(top_matches)
         
         internalThoughtPrompt = data['internal_thought']
         internalThoughtPrompt = internalThoughtPrompt.replace("{query}", query).replace("{top_matches}", top_matches).replace("{last_message}", self.last_message)
-        print("------------INTERNAL THOUGHT PROMPT------------")
-        print(internalThoughtPrompt)
+        if DEBUG:
+            print("------------INTERNAL THOUGHT PROMPT------------")
+            print(internalThoughtPrompt)
         internal_thought = generate(internalThoughtPrompt) # OPENAI CALL: top_matches and query text is used here
         
         # Debugging purposes
-        #print(internal_thought)
+        if DEBUG:
+            print("------------INTERNAL THOUGHT PROMPT------------")
+            print(internal_thought)
 
         internalMemoryPrompt = data['internal_thought_memory']
         internalMemoryPrompt = internalMemoryPrompt.replace("{query}", query).replace("{internal_thought}", internal_thought).replace("{last_message}", self.last_message)
@@ -170,8 +176,9 @@ class Agent():
         
         externalThoughtPrompt = data['external_thought']
         externalThoughtPrompt = externalThoughtPrompt.replace("{query}", query).replace("{top_matches}", top_matches).replace("{internal_thought}", internal_thought).replace("{last_message}", self.last_message)
-        print("------------EXTERNAL THOUGHT PROMPT------------")
-        print(externalThoughtPrompt)
+        if DEBUG:
+            print("------------EXTERNAL THOUGHT PROMPT------------")
+            print(externalThoughtPrompt)
         external_thought = generate(externalThoughtPrompt) # OPENAI CALL: top_matches and query text is used here
 
         externalMemoryPrompt = data['external_thought_memory']
@@ -180,8 +187,9 @@ class Agent():
         request_memory = data["request_memory"]
         self.updateMemory(request_memory.replace("{query}", query), QUERIES)
         self.last_message = query
-        print("------------EXTERNAL THOUGHT------------")
-        print(external_thought)
+        if DEBUG:
+            print("------------EXTERNAL THOUGHT------------")
+            print(external_thought)
         if "[ORDER_COFFEE]" in external_thought:
             order_coffee()
         if "[ORDER_MEDICINE]" in external_thought:
